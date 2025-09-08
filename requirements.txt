@@ -9,7 +9,8 @@ scikit-learn
 
 # Trading and indicators
 MetaTrader5
-TA-Lib
+TA-Lib==0.4.28
+pandas-ta==0.3.14b0
 
 # Dashboard
 streamlit
@@ -28,6 +29,8 @@ openai
 pytest
 loguru
 tqdm
+pytest-cov==4.1.0
+pytest-html==4.1.0
 
 # Hyperparameter optimization
 optuna

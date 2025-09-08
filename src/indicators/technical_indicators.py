@@ -1,7 +1,7 @@
 import pandas as pd
 import talib
 import numpy as np
-from pandas_ta import adx, obv  # pip install pandas_ta if needed
+from pandas_ta import adx, obv
 
 class TechnicalIndicators:
     def __init__(self, data):
@@ -22,7 +22,7 @@ class TechnicalIndicators:
                 cci_sma2_shift2 = pd.Series(cci_raw).rolling(2).mean().shift(2)
                 cci_sma5 = pd.Series(cci_raw).rolling(5).mean()
                 features.extend([cci_raw, cci_sma2_shift2, cci_sma5])  # 15 base x 3 x 4 TF = 180
-        return np.concatenate(features)
+        return pd.DataFrame(features).T.fillna(0)
 
     def compute_sma(self, periods=range(1,21), additional=[50,200]):
         features = []
@@ -32,9 +32,10 @@ class TechnicalIndicators:
                 fwd_shift = pd.Series(close).rolling(p).mean().shift(-(p-1))  # Forward shift 0 to +19
                 bwd_shift = pd.Series(close).rolling(p).mean().shift(p)  # Backward -1 to -20
                 features.extend([fwd_shift, bwd_shift])
-            features.append(pd.Series(close).rolling(50).mean())  # SMA50 shift=0
-            features.append(pd.Series(close).rolling(200).mean())  # SMA200 shift=0
-        return np.concatenate(features)  # 20 fwd + 20 bwd + 2 x 4 TF = 168
+            # Add additional periods
+            for p in additional:
+                features.append(pd.Series(close).rolling(p).mean())
+        return pd.DataFrame(features).T.fillna(0)
 
     def compute_atr(self, periods=[5,14]):
         features = []
@@ -44,16 +45,20 @@ class TechnicalIndicators:
                 atr_raw = talib.ATR(high, low, close, timeperiod=p)
                 atr_sma2_shift2 = pd.Series(atr_raw).rolling(2).mean().shift(2)
                 features.extend([atr_raw, atr_sma2_shift2])  # 2 p x 2 var x 4 TF = 16
-        return np.concatenate(features)
+        return pd.DataFrame(features).T.fillna(0)
 
     def compute_adx(self):
         features = []
         for tf_data in self.resampled.values():
-            features.append(adx(tf_data['high'], tf_data['low'], tf_data['close'], length=14)['ADX_14'])  # 4 TF
-        return np.concatenate(features)
+            high, low, close = tf_data['high'], tf_data['low'], tf_data['close']
+            adx_val = adx(high, low, close, length=14)
+            features.append(adx_val['ADX_14'] if 'ADX_14' in adx_val.columns else pd.Series([50]*len(close)))
+        return pd.DataFrame(features).T.fillna(50)
 
     def compute_obv(self):
         features = []
         for tf_data in self.resampled.values():
-            features.append(obv(tf_data['close'], tf_data['volume']))  # 4 TF
-        return np.concatenate(features)
+            close, volume = tf_data['close'], tf_data['volume']
+            obv_val = obv(close, volume)
+            features.append(obv_val)
+        return pd.DataFrame(features).T.fillna(0)
