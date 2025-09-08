@@ -29,7 +29,7 @@ if not run_setup():
 import argparse
 import subprocess
 from src.environment.trading_environment import TradingEnv
-from src.models.ppo_model import train_model, PPO
+from src.models.ppo_model import train_model, train_model_with_monitoring, PPO
 from src.mt5_connector import export_ohlcv
 from config.trading_config import ASSETS, TIMEFRAMES
 
@@ -39,7 +39,17 @@ subparsers = parser.add_subparsers()
 # Train local
 train_local = subparsers.add_parser('train_local')
 train_local.add_argument('--days', type=int, default=100)
-train_local.set_defaults(func=lambda args: train_model(TradingEnv({}), total_timesteps=args.days*1440*60))  # Steps per day approx
+train_local.add_argument('--monitor-freq', type=int, default=100, help='Display update frequency (timesteps)')
+train_local.set_defaults(func=lambda args: train_model_with_monitoring(
+    TradingEnv({}), 
+    total_timesteps=args.days*1440*60, 
+    monitor_frequency=args.monitor_freq
+))
+
+# Train local (legacy - no monitoring)
+train_simple = subparsers.add_parser('train_simple')
+train_simple.add_argument('--days', type=int, default=100)
+train_simple.set_defaults(func=lambda args: train_model(TradingEnv({}), total_timesteps=args.days*1440*60))
 
 # Train Colab (run in notebook)
 # Live trade

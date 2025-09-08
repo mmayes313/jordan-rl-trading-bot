@@ -284,7 +284,7 @@ def test_5_model_and_training(env):
     """
     logger.info("=== DIAGNOSTIC 5: Model & Training ===")
 
-    model = create_ppo_model(env)  # From ppo_model.py (default hyperparams)
+    model, callback = create_ppo_model(env, monitor_training=False)  # Disable monitoring for test
     model.learn(total_timesteps=10000, log_interval=10)  # Short run
 
     # Check final metrics
