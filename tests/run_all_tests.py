@@ -34,20 +34,46 @@ def run_tests():
         return False
     print()
 
-    # Run pytest
+    # Run pytest with diagnostic logging
     print("🧪 Running unit tests...")
-    result = subprocess.run([sys.executable, '-m', 'pytest', 'tests/', '-v'],
-                           capture_output=True, text=True)
+    print("📋 Including Jordan's Diagnostic Test Suite...")
+
+    # Run diagnostic test first with detailed logging
+    diag_result = subprocess.run([
+        sys.executable, '-m', 'pytest',
+        'tests/test_diagnostic.py',
+        '-v', '--log-cli-level=INFO'
+    ], capture_output=True, text=True)
+
+    print("=== DIAGNOSTIC TEST RESULTS ===")
+    print(diag_result.stdout)
+    if diag_result.stderr:
+        print("Diagnostic Errors:", diag_result.stderr)
+
+    # Run all other tests
+    print("\n=== ALL TESTS ===")
+    result = subprocess.run([
+        sys.executable, '-m', 'pytest',
+        'tests/', '-v', '--ignore=tests/test_diagnostic.py'
+    ], capture_output=True, text=True)
 
     print(result.stdout)
     if result.stderr:
         print("Errors:", result.stderr)
 
-    if result.returncode == 0:
+    # Check overall success
+    diag_success = diag_result.returncode == 0
+    other_success = result.returncode == 0
+
+    if diag_success and other_success:
         print("✅ All tests passed!")
         return True
     else:
         print("❌ Some tests failed!")
+        if not diag_success:
+            print("   - Diagnostic test failed")
+        if not other_success:
+            print("   - Other tests failed")
         return False
 
 if __name__ == "__main__":
