@@ -1,1 +1,11 @@
-# TODO: Implement per scope.
+# Mock hyperparameter configuration for testing without optuna
+def suggest_hyperparams(trial=None):
+    return {
+        'learning_rate': 0.0003,
+        'n_steps': 2048,
+        'batch_size': 64,
+        'n_epochs': 10,
+        'gamma': 0.99,
+        'clip_range': 0.2,
+        'ent_coef': 0.01
+    }
