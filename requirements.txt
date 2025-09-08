@@ -1,0 +1,33 @@
+# Core RL and ML dependencies
+stable-baselines3
+torch
+gym
+gymnasium
+numpy
+pandas
+scikit-learn
+
+# Trading and indicators
+MetaTrader5
+TA-Lib
+
+# Dashboard
+streamlit
+plotly
+
+# Data processing
+scipy
+yfinance
+
+# News and API
+requests
+beautifulsoup4
+openai
+
+# Testing and utilities
+pytest
+loguru
+tqdm
+
+# Hyperparameter optimization
+optuna

@@ -1,0 +1,2 @@
+# API keys for dashboard integrations
+GROK_API_KEY = 'xai-CDjesDn105pegec3O6U7ZpAyXcUIc2ZttJ1fSyW16AYuIXdSIiaSeUomZn1mlrxQTdRhrK2jIcxBH9cl'
