@@ -7,6 +7,13 @@ import pandas as pd
 import numpy as np
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from loguru import logger
+import joblib
+
+def preprocess(data):
+    scaler = MinMaxScaler(feature_range=(-1, 1))
+    scaled = scaler.fit_transform(data.select_dtypes(include=[np.number]))
+    joblib.dump(scaler, '../data/models/scaler.pkl')
+    return scaled
 
 class DataProcessor:
     """
