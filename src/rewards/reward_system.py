@@ -13,6 +13,21 @@ class RewardSystem:
         self.episode_count = 0
         self.successful_episodes = 0
 
+    def compute_reward(self, state, action, obs):
+        """
+        Compute reward for diagnostic testing.
+        
+        Args:
+            state: Dictionary with pnl, trades, drawdown, time_of_day
+            action: Dictionary with lot_size, type
+            obs: Current observation
+            
+        Returns:
+            float: Computed reward
+        """
+        pnl_change = state.get('pnl', 0.0)
+        return self.get_reward(state, action.get('type', 'hold'), pnl_change)
+
     def get_reward(self, state, action, pnl_change, is_end_of_episode=False):
         reward = 0.0
         current_time = state['time_of_day']  # Normalized
