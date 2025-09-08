@@ -1,1 +1,5 @@
-# TODO: Implement per scope.
+import streamlit as st
+import plotly.graph_objects as go
+from streamlit_autorefresh import st_autorefresh
+
+st.write("Tab content placeholder - Live Dashboard with metrics and charts")

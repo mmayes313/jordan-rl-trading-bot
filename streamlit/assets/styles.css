@@ -1,1 +1,97 @@
-# dark-theme { background: #000; }
+.stApp {
+    background-color: #0e1117;
+    color: white;
+}
+/* Dark theme */
+
+body {
+    background-color: #0e1117;
+    color: white;
+}
+
+.sidebar .sidebar-content {
+    background-color: #1a1c23;
+}
+
+.metric-container {
+    background-color: #1a1c23;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px 0;
+}
+
+.metric-label {
+    color: #8c8c8c;
+    font-size: 14px;
+}
+
+.metric-value {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.metric-delta {
+    color: #00ff00;
+    font-size: 16px;
+}
+
+.metric-delta.negative {
+    color: #ff4444;
+}
+
+.progress-bar {
+    background-color: #333;
+    border-radius: 5px;
+    height: 10px;
+}
+
+.progress-fill {
+    background-color: #00ff00;
+    height: 100%;
+    border-radius: 5px;
+}
+
+.trade-card {
+    background-color: #1a1c23;
+    border-radius: 8px;
+    padding: 12px;
+    margin: 8px 0;
+    border-left: 4px solid #00ff00;
+}
+
+.trade-card.sell {
+    border-left-color: #ff4444;
+}
+
+.chat-message {
+    background-color: #1a1c23;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 5px 0;
+}
+
+.chat-message.jordan {
+    background-color: #2a2d3a;
+    border-left: 4px solid #ffaa00;
+}
+
+.signal-card {
+    background-color: #1a1c23;
+    border-radius: 8px;
+    padding: 12px;
+    margin: 8px 0;
+    border-left: 4px solid #00aaff;
+}
+
+.confidence-high {
+    border-left-color: #00ff00;
+}
+
+.confidence-medium {
+    border-left-color: #ffaa00;
+}
+
+.confidence-low {
+    border-left-color: #ff4444;
+}
