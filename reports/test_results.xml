@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="3" failures="0" skipped="0" tests="3" time="11.029" timestamp="2025-09-08T16:20:53.785525-07:00" hostname="DESKTOP-5QDP18D"><testcase classname="" name="tests.test_diagnostic" time="0.000"><error message="collection failure">venv\Lib\site-packages\_pytest\python.py:498: in importtestmodule
+    mod = import_path(
+venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+..\..\..\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+&lt;frozen importlib._bootstrap&gt;:1206: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1178: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1149: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+venv\Lib\site-packages\_pytest\assertion\rewrite.py:177: in exec_module
+    source_stat, co = _rewrite_test(fn, self.config)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\_pytest\assertion\rewrite.py:357: in _rewrite_test
+    tree = ast.parse(source, filename=strfn)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\AppData\Local\Programs\Python\Python311\Lib\ast.py:50: in parse
+    return compile(source, filename, mode, flags,
+E     File "C:\Users\user\OneDrive\Desktop\jordan_rl_trading_bot\tests\test_diagnostic.py", line 449
+E       else:
+E       ^^^^
+E   SyntaxError: invalid syntax</error></testcase><testcase classname="" name="tests.test_jordan" time="0.000"><error message="collection failure">tests\test_jordan.py:3: in &lt;module&gt;
+    from streamlit.components.jordan_personality import get_jordan_response
+streamlit\components\jordan_personality.py:9: in &lt;module&gt;
+    client = OpenAI(
+venv\Lib\site-packages\openai\_client.py:135: in __init__
+    raise OpenAIError(
+E   openai.OpenAIError: The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable</error></testcase><testcase classname="" name="tests.test_jordan_personality" time="0.000"><error message="collection failure">tests\test_jordan_personality.py:3: in &lt;module&gt;
+    from streamlit.components.jordan_personality import get_jordan_response
+streamlit\components\jordan_personality.py:9: in &lt;module&gt;
+    client = OpenAI(
+venv\Lib\site-packages\openai\_client.py:135: in __init__
+    raise OpenAIError(
+E   openai.OpenAIError: The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable</error></testcase></testsuite></testsuites>
